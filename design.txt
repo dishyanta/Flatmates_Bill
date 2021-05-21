@@ -1,0 +1,44 @@
+Title: Flatmates Bill
+
+Description: An app that takes total bill amount and asks each flatmates their duration of stay and generates a pdf report of the amount each of them have to pay for
+             a particular month along with their name and duration of stay.
+
+Objects:
+        Bill:
+            amount
+            period
+        Flatmate:
+            name
+            days_in_house
+            pays(bill)
+        PdfReport:
+            filename
+            generate(flatmate1, flatmate2, bill)
+
+
+class Bill:
+    """
+    Object that contains info about Bill such as Total Amount and Period
+    """
+
+    def __init__(self, amount, period):
+        self.amount = amount
+        self.period = period
+
+class Flatmate:
+    """
+    Creates a flatmate person who lives in the house and pays the bills
+    """
+
+    def __init__(self, name, days_in_house):
+        self.name = name
+        self.days_in_house = days_in_house
+
+    def pays(self, bill, flatmate2):
+        weight = self.days_in_house / (self.days_in_house + flatmate2.days_in_house)
+        to_pay = bill * weight
+        return to_pay
+
+        def generate(self, flatmate1, flatmate2, bill):
+        flatmate1_pays = str(round(flatmate1.pays(bill, flatmate2), 2))
+        flatmate2_pays = str(round(flatmate2.pays(bill, flatmate1), 2))
